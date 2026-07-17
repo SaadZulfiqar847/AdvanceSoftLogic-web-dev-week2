@@ -1,5 +1,8 @@
+// app.js
+import { loadTasks, saveTasks } from "./storage.js";
+
 // In-memory state
-let tasks = [];
+let tasks = loadTasks();
 
 // DOM references
 const taskForm = document.getElementById("task-form");
@@ -33,6 +36,7 @@ function handleAddTask(event) {
 
   newTaskInput.value = "";
 
+  saveTasks(tasks);
   render();
 }
 
@@ -44,12 +48,14 @@ taskForm.addEventListener("submit", handleAddTask);
 function toggleTaskComplete(id) {
   tasks = tasks.map((task) => {
     if (task.id !== id) return task;
+
     return {
       ...task,
       completed: !task.completed,
     };
   });
 
+  saveTasks(tasks);
   render();
 }
 
@@ -59,6 +65,7 @@ function toggleTaskComplete(id) {
 function deleteTask(id) {
   tasks = tasks.filter((task) => task.id !== id);
 
+  saveTasks(tasks);
   render();
 }
 
