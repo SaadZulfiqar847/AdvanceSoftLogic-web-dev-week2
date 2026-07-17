@@ -83,7 +83,13 @@ main {
   min-height: 1.2rem;
   margin-top: 0.35rem;
 }
-
+.edit-input {
+    flex: 1;
+    padding: 4px 8px;
+    font-size: 1rem;
+    border: 1px solid #888;
+    border-radius: 4px;
+}
 /* Filters */
 
 .filters {
