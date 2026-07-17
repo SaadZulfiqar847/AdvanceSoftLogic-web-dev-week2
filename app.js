@@ -70,7 +70,26 @@ function deleteTask(id) {
   saveTasks(tasks);
   render();
 }
+function editTask(id, newText) {
+  const updatedText = newText.trim();
 
+  if (updatedText === "") {
+    render();
+    return;
+  }
+
+  tasks = tasks.map((task) => {
+    if (task.id !== id) return task;
+
+    return {
+      ...task,
+      text: updatedText,
+    };
+  });
+
+  saveTasks(tasks);
+  render();
+}
 /**
  * Returns the subset of tasks matching the current filter.
  */
@@ -128,7 +147,33 @@ function render() {
 
     li.querySelector(".task-toggle").addEventListener("click", () => toggleTaskComplete(id));
     li.querySelector(".task-delete").addEventListener("click", () => deleteTask(id));
+    const taskTextEl = li.querySelector(".task-text");
 
+taskTextEl.addEventListener("dblclick", () => {
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = text;
+  input.className = "edit-input";
+
+  taskTextEl.replaceWith(input);
+
+  input.focus();
+  input.select();
+
+  function finishEditing() {
+    editTask(id, input.value);
+  }
+
+  input.addEventListener("blur", finishEditing);
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      finishEditing();
+    }
+  });
+
+});
     taskListEl.appendChild(li);
   });
 
