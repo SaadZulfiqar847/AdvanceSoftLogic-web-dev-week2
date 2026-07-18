@@ -35,12 +35,18 @@
             <ul class="task-list" id="task-list">
                 <!-- task <li> items get injected here by app.js -->
             </ul>
+            <ul class="task-list" id="task-list"></ul>
+      <p class="empty-state" id="empty-state">No tasks yet — add one above!</p>
 
+      <div class="list-footer">
+        <button type="button" id="clear-completed-btn" class="clear-btn">Clear completed</button>
+        <div class="task-counter" id="task-counter">
+          <span id="tasks-remaining">0</span> tasks remaining
+        </div>
+      </div>
             <p class="empty-state" id="empty-state">No tasks yet — add one above!</p>
 
-            <div class="task-counter" id="task-counter">
-                <span id="tasks-remaining">0</span> tasks remaining
-            </div>
+            
 
         </section>
     </main>

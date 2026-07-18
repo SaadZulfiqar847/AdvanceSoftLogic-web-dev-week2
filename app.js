@@ -90,6 +90,19 @@ function editTask(id, newText) {
   saveTasks(tasks);
   render();
 }
+
+/**
+ * Removes every completed task in one action.
+ */
+function clearCompletedTasks() {
+  tasks = tasks.filter((task) => !task.completed);
+  saveTasks(tasks);
+  render();
+}
+
+const clearCompletedBtn = document.getElementById("clear-completed-btn");
+clearCompletedBtn.addEventListener("click", clearCompletedTasks);
+
 /**
  * Returns the subset of tasks matching the current filter.
  */
@@ -168,10 +181,16 @@ taskTextEl.addEventListener("dblclick", () => {
   input.addEventListener("blur", finishEditing);
 
   input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      finishEditing();
-    }
-  });
+
+  if (event.key === "Enter") {
+    finishEditing();
+  }
+
+  if (event.key === "Escape") {
+    render();
+  }
+
+});
 
 });
     taskListEl.appendChild(li);
